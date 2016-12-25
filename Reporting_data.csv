@@ -1,0 +1,58 @@
+skillname,DescriptionsType,DescriptionsCategory,FrequencyTotal
+TEAM,"Soft Skills ","Soft Skills ",470
+STATISTICS,"Hard Skills","knowledge",245
+SQL,"Hard Skills","Database",236
+MACHINELEARNING,"Hard Skills","knowledge",165
+COMMUNICATION,"Soft Skills ","Soft Skills ",134
+MODELING,"Hard Skills","knowledge",133
+PYTHON,"Hard Skills","Programming",125
+R,"Hard Skills","Programming",93
+COLLABORATE,"Soft Skills ","Soft Skills ",89
+HADOOP,"Hard Skills","software framework",83
+VISUALIZATION,"Hard Skills","knowledge",76
+JAVA,"Hard Skills","Programming",75
+SAS,"Hard Skills","Analytical Software",60
+PRESENTATION,"Soft Skills ","Soft Skills ",58
+EXCEL,"Hard Skills","Analytical Software",46
+TABLEAU,"Hard Skills","Analytical Software",44
+SPARK,"Hard Skills","software framework",43
+SCALA,"Hard Skills","Programming",34
+HIVE,"Hard Skills","software framework",34
+PROBLEMSOLVING,"Soft Skills ","Soft Skills ",32
+INDEPENDENT,"Soft Skills ","Soft Skills ",28
+INTERPERSONAL,"Soft Skills ","Soft Skills ",28
+AWS,"Hard Skills","cloud services platform",27
+MATLAB,"Hard Skills","Analytical Software",26
+MOTIVATED,"Soft Skills ","Soft Skills ",25
+NOSQL,"Hard Skills","Database",24
+MAPREDUCE,"Hard Skills","software framework",23
+CREATIVITY,"Soft Skills ","Soft Skills ",20
+UNIXLINUX,"Hard Skills","software framework",20
+SPSS,"Hard Skills","Analytical Software",18
+PIG,"Hard Skills","software framework",18
+PERL,"Hard Skills","Programming",17
+ORACLE,"Hard Skills","Database",17
+MYSQL,"Hard Skills","Database",16
+JAVASCRIPT,"Hard Skills","Programming",12
+POWERPOINT,"Hard Skills","knowledge",11
+KAFKA,"Hard Skills","software framework",11
+LEADERSHIP,"Soft Skills ","Soft Skills ",9
+PHP,"Hard Skills","Programming",9
+ORGANIZED,"Soft Skills ","Soft Skills ",9
+TERADATA,"Hard Skills","Database",9
+MONGODB,"Hard Skills","Database",8
+RUBY,"Hard Skills","Programming",8
+HTML,"Hard Skills","Programming",8
+POSTGRESSQL,"Hard Skills","Database",7
+LISTENING,"Soft Skills ","Soft Skills ",6
+CSS,"Hard Skills","Programming",4
+SYBASE,"Hard Skills","Database",3
+CASSANDRA,"Hard Skills","Database",3
+WEKA,"Hard Skills","software framework",3
+ZOOKEEPER,"Hard Skills","software framework",2
+VERTICA,"Hard Skills","Analytical Software",2
+AEROSPIKE,"Hard Skills","Database",1
+DB2,"Hard Skills","Database",1
+JSON,"Hard Skills","Programming",1
+ENERGETIC,"Soft Skills ","Soft Skills ",1
+JQUERY,"Hard Skills","Programming",1

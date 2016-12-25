@@ -1,0 +1,172 @@
+---
+title: "DATA-607_Porject 3"
+author: "Md Jalal Uddin"
+date: "December 18, 2016"
+output: html_document
+---
+```{r}
+#Loading packages
+
+library("getPass")
+library("wordcloud")
+library("RColorBrewer")
+library("stringr")
+library("RCurl")
+library("bitops")
+library("RMySQL")
+
+Job_Posting_url = "https://raw.githubusercontent.com/uddinjalal1983/Project_3_Data_Science/master/JobPostingData.txt" #getting jobposting text file from github
+
+Job_Posting_Data = getURL(Job_Posting_url) #showing the jobposting data
+
+
+```
+
+`#Data Gathering
+
+```{r}
+#Below code creates data frame and searches text files for key words from the JobPosting file. 
+
+Data_Frame=data.frame(c(
+SQL = sum(str_count(Job_Posting_Data, "sql|SQL")),
+Teradata = sum(str_count(Job_Posting_Data, "Teradata")),
+MySQL = sum(str_count(Job_Posting_Data, "mysql|MySql | MySQL")),
+Oracle = sum(str_count(Job_Posting_Data, "oracle|Oracle")),
+Sybase = sum(str_count(Job_Posting_Data, "Sybase")),
+DB2 = sum(str_count(Job_Posting_Data, "DB2")),
+PostgresSQL = sum(str_count(Job_Posting_Data, "Postgres|PostgreSQL")),
+SAS = sum(str_count(Job_Posting_Data, "SAS")),
+Python = sum(str_count(Job_Posting_Data, "Python|python")),
+PHP = sum(str_count(Job_Posting_Data, "php|PHP")),
+Ruby = sum(str_count(Job_Posting_Data, "Ruby|ruby")),
+Matlab = sum(str_count(Job_Posting_Data, "Matlab|MATLAB")),
+Java = sum(str_count(Job_Posting_Data, "Java|java")),
+MongoDB = sum(str_count(Job_Posting_Data, "MongoDB|mongodb")),
+Hadoop = sum(str_count(Job_Posting_Data, "Hadoop")),
+Spark = sum(str_count(Job_Posting_Data, "Spark")),
+SPSS = sum(str_count(Job_Posting_Data, "SPSS")),
+Tableau = sum(str_count(Job_Posting_Data, "Tableau")),
+Excel = sum(str_count(Job_Posting_Data, "excel")),
+Statistics = sum(str_count(Job_Posting_Data, "Statistics|statistical|Statistics")),
+Modeling = sum(str_count(Job_Posting_Data, "modeling")),
+Pig = sum(str_count(Job_Posting_Data, "Pig|PIG")),
+MapReduce = sum(str_count(Job_Posting_Data, "MapReduce|Map-Reduce|map reduce|Map Reduce")),
+Hive = sum(str_count(Job_Posting_Data, "Hive")),
+Weka = sum(str_count(Job_Posting_Data, "Weka|weka")),
+UNIXLinux = sum(str_count(Job_Posting_Data, "UNIX|Linux")),
+Scala = sum(str_count(Job_Posting_Data, "scala")),
+AWS = sum(str_count(Job_Posting_Data, "AWS")),
+NoSQL = sum(str_count(Job_Posting_Data, "NoSQL| No-SQL | nosql")),
+MachineLearning = sum(str_count(Job_Posting_Data, "machinelearning|machine learning|MachineLearning|Machine Learning")),
+Perl = sum(str_count(Job_Posting_Data, "Perl")),
+Kafka = sum(str_count(Job_Posting_Data, "Kafka")),
+Visualization = sum(str_count(Job_Posting_Data, "visualization")),
+HTML = sum(str_count(Job_Posting_Data, "HTML")),
+CSS = sum(str_count(Job_Posting_Data, "CSS")),
+PowerPoint = sum(str_count(Job_Posting_Data, "PowerPoint|Powerpoint")),
+JQuery = sum(str_count(Job_Posting_Data, "JQuery")),
+JavaScript = sum(str_count(Job_Posting_Data, "JavaScript|Javascript")),
+Cassandra = sum(str_count(Job_Posting_Data, "Cassandra")),
+Aerospike = sum(str_count(Job_Posting_Data, "Aerospike")),
+Vertica = sum(str_count(Job_Posting_Data, "Vertica")),
+Zookeeper = sum(str_count(Job_Posting_Data, "Zookeeper")),
+JSON = sum(str_count(Job_Posting_Data, "json|JSON")),
+Communication = sum(str_count(Job_Posting_Data, "communication|Communicator|communicator")),
+Interpersonal = sum(str_count(Job_Posting_Data, "interpersonal")),
+Leadership = sum(str_count(Job_Posting_Data, "Leadership")),
+team = sum(str_count(Job_Posting_Data, "team|teamwork")),
+Motivated = sum(str_count(Job_Posting_Data, "motivated")),
+ProblemSolving = sum(str_count(Job_Posting_Data, "Problem solving|problem solving|Problem solver|problem solvers")),
+Creativity = sum(str_count(Job_Posting_Data, "creativity|Creative|creativity")),
+Collaborate = sum(str_count(Job_Posting_Data, "collaborate|collaboration|Collaborates|collaborative")),
+Energetic = sum(str_count(Job_Posting_Data, "Energetic")),
+Organized = sum(str_count(Job_Posting_Data, "Organized|organized")),
+Independent = sum(str_count(Job_Posting_Data, "Independent|independently")),
+Listening = sum(str_count(Job_Posting_Data, "listening|listen")),
+Presentation = sum(str_count(Job_Posting_Data, "presentations|presentation")),
+R = sum(str_count(Job_Posting_Data, ", R,| R,|, R | R "))
+))
+
+colnames(Data_Frame) = c("total") #count total frequencies of the word of the skill
+
+Data_Frame 
+
+#Exporting a csv file into C:/Users/sql_ent_svc/Desktop/Data_607_Project_3/Reporting_data.CSV location of my computer. 
+
+write.csv(Data_Frame, file="Frequency1.csv",row.names=TRUE, col.names = FALSE)
+
+```
+
+
+
+```{r}
+# Creating table in MySQL database. 
+
+library(RMySQL)
+DATA_db1 = dbConnect(MySQL(), user='root', password='abcd1234', host='localhost')
+dbSendQuery(DATA_db1, 'CREATE SCHEMA DATA_Final1;')
+dbSendQuery(DATA_db1, 'Use DATA_Final1;')
+
+dbSendQuery(DATA_db1,'CREATE TABLE Descriptions (
+    DescriptionsName varchar(125) not null, 
+  DescriptionsType varchar(125) not null,
+  DescriptionsCategory varchar(125) not null,
+  PRIMARY KEY (DescriptionsName));')
+
+dbSendQuery(DATA_db1,' CREATE TABLE Frequency (
+   FrequencyName varchar(125) not null, 
+  FrequencyTotal int NULL,
+    PRIMARY KEY (FrequencyName));')
+
+
+```
+
+After Creating the table I have inserted the data from my computer to the database by LOAD DATA LOCAL INFILE commant into both Description and Frequency table. Than I created Join_Data in MySQL by join statement and save the data into my computer. 
+
+```{r}
+#Getting Join_Data from my computer to R
+
+Join_Data <- read.csv('C:/Users/sql_ent_svc/Desktop/Data_607_Project_3/Reporting_data.CSV', header=TRUE, stringsAsFactors=FALSE)
+
+head (Join_Data)
+
+```
+
+Creating a bar plot of Most frequnt skill from the various job posting in New York and New Jersey. 
+
+```{r}
+library(ggplot2)   
+
+barplot(Join_Data[1:15,]$FrequencyTotal, las = 2, names.arg = Join_Data[1:15,]$skillname,
+        col ="lightblue", main ="Most frequent skill",
+        ylab = "Skill frequencies")
+
+
+```
+
+Creating a pie chart of Most frequnt skill from the various job posting in New York and New Jersey. 
+
+```{r}
+# Pie Chart with word frequencies
+Frequency <- c(470, 245, 236, 165, 134, 133, 125, 93, 89, 83,76,75,60, 58, 46) 
+skill <- c("TEAM", "STATISTICS", "SQL", "MACHINELEARNING", "COMMUNICATION", "MODELING", "PYTHON", "R", "COLLABORATE", "HADOOP", "VISUALIZATION", "JAVA", "SAS", "PRESENTATION", "EXCEL")
+pct <- round(Frequency/sum(Frequency)*100)
+skill<- paste(skill, pct) # add percents to labels 
+skill <- paste(skill,"%",sep="") # ad % to labels 
+pie(Frequency,labels = skill, col=rainbow(length(skill)),
+  	main="Pie Chart with word frequencies in various Job posting")
+
+```
+
+Creating wordcloud of Most frequnt skill from the various job posting in New York and New Jersey. 
+```{r}
+#source for wordcloud usage
+#http://www.sthda.com/english/wiki/text-mining-and-word-cloud-fundamentals-in-r-5-simple-steps-you-should-know
+
+wordcloud(words =Join_Data$skillname, freq = Join_Data$FrequencyTotal, min.freq = 1,
+          max.words=500, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+
+
+```
+
